@@ -16,18 +16,19 @@ const routes = [
     name: 'director',
     component: Director
   },
-
+  
+  {
+    path: '/info-sec-approval',
+    name: 'infosec',
+    component: InfoSec
+  },
+  
   {
     path: '/it-director-approval',
     name: 'itdirector',
     component: It,
   },
 
-  {
-    path: '/info-sec-approval',
-    name: 'infosec',
-    component: InfoSec
-  }
 ]
 
 const router = createRouter({

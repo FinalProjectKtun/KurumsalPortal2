@@ -1,128 +1,132 @@
-<template class="d-flex justify-center">
-    <div class="w-100 h-25 d-flex justify-center align-items-center pt-10 pb-10">
-        <v-card>
-          <v-card-title>
-            <v-spacer></v-spacer>
-            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
-          </v-card-title>
-          <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
-        </v-card>
+<template>
+  {{ console() }}
+  <div class="notice-wrapper pt-5 pb-5 pl-5 pr-5 mt-10" v-if="this.filteredRequestList.length === 0">
+    <div>
+      <v-card variant="tonal">
+        <v-card-title>
+          <h2>Henüz Gösterilecek Bir Talep Bulunamadı!</h2>
+        </v-card-title>
+      </v-card>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        search: '',
-        dataTableHeaders: [
-            { text: 'Talep No', align: 'start', sortable: true, value: 'symbol' },
-            { text: 'Tedarikçi Adı', value: 'lastPrice', sortable: true},
-            { text: 'Talep Tarihi', sortable: true,value: 'weightedAvgPrice' },
-            { text: 'Sorumlu Kişi', sortable: true, value: "count" },
-            { text: 'Tedarikçi Bağlanacağı Sistemler', sortable: true, value: "count" },
-            { text: 'Başlangıç Tarihi', sortable: true, value: "count" },
-            { text: 'Bitiş Tarihi', sortable: true, value: "count" },
-            { text: 'Deneme', sortable: true, value: "count" },
-            { text: 'Statü', sortable: true, value: "count" },
-        ],
-        headers: [
-          {
-            align: 'start',
-            key: 'name',
-            sortable: false,
-            title: 'Dessert (100g serving)',
-          },
-          { key: 'calories', title: 'Calories' },
-          { key: 'fat', title: 'Fat (g)' },
-          { key: 'carbs', title: 'Carbs (g)' },
-          { key: 'protein', title: 'Protein (g)' },
-          { key: 'iron', title: 'Iron (%)' },
-        ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: 1,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: 7,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: 8,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: 16,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: 0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: 2,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: 45,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: 22,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: 6,
-          },
-        ],
+  </div>
+  <div class="data-table-wrapper pt-5 pb-5 pl-5 pr-5 mt-10" v-else>
+    <v-data-table :headers="dataTableHeaders" :items="filteredRequestList" class="elevation-1" style="font-size: 1rem;"
+      :search="search">
+      <template v-slot:top>
+        <v-toolbar flat>
+          <v-toolbar-title>Tedarikçi Erişim Talepleri</v-toolbar-title>
+          <v-spacer>
+            <v-divider class="mx-4" inset vertical></v-divider>
+          </v-spacer>
+          <v-text-field class="mr-4" v-model="search" label="Search" single-line hide-details style="background: none;"
+            variant="outlined">
+          </v-text-field>
+        </v-toolbar>
+      </template>
+      <template  v-slot:[`item.islem`]="{ item }">
+        <div v-if="$route.name !== 'home'">
+          <v-btn color="purple" size="small" @click="openModal(item.raw), addNewRequest(item.raw)">
+            İşlem
+          </v-btn>
+        </div>
+        <div v-else>
+          <v-btn color="blue" size="small" @click="openDetailModal(item.raw)">
+            Detaylar
+          </v-btn>
+        </div>
+      </template>
+    </v-data-table>
+  </div>
+</template>
+
+<script>
+
+export default {
+
+  data: () => ({
+    showNestedDialog: false,
+    search: '',
+    showModal: false,
+    selectedItem: null,
+    newRequests: [],
+    dataTableHeaders: [
+      {
+        title: 'Talep No',
+        align: 'start',
+        sortable: true,
+        key: 'id'
+      },
+      { title: 'Tedarikçi Adı', key: 'supplierName' },
+      { title: 'Talep Tarihi', key: 'supplierDate' },
+      { title: 'Sorumlu Kişi', key: 'personResponsibleForTheRequest' },
+      // { title: 'S. Kişi No', key: 'phoneNumOfThePerResForTheReq' },
+      { title: 'Sistem', key: 'supplierConnectSystemName' },
+      // { title: 'Başlangıç Tarihi', key: 'supplierConnectStarted' },
+      // { title: 'Bitiş Tarihi', key: 'supplierConnectEnd' },
+      // { title: 'Açıklama', key: 'description' },
+      { title: 'Status', key: 'status' },
+      { title: 'İşlem', key: 'islem' },
+    ],
+  }),
+
+  computed: {
+    filteredRequestList() {
+      if (this.$route.name === 'director') {
+        return this.$store.state.allRequestsData.filter(item => item.status === 'İşlem Bekleniyor');
+      }
+
+      else if (this.$route.name === 'infosec') {
+        return this.$store.state.allRequestsData.filter(item => item.status === 'Awaiting Info Sec Approval');
+      }
+
+      else if (this.$route.name === 'itdirector') {
+        return this.$store.state.allRequestsData.filter(item => item.status === 'Awaiting IT Dir Approval');
+      }
+      else {
+        return this.$store.state.allRequestsData;
       }
     },
-  }
-  </script>
-  
+  },
+
+  methods: {
+    openModal(item) {
+      this.$store.dispatch('openConModal')
+      this.$store.dispatch('getRequestDataToModal', item)
+      console.log("item", item);
+    },
+
+    openDetailModal(item) {
+      this.$store.dispatch('openDetailModal')
+      this.$store.dispatch('getRequestDataToModal', item)
+      console.log("item", item);
+    },
+
+    console() {
+      console.log("modalData", this.$store.state.requestData);
+      console.log(this.$store.state.allRequestsData);
+    },
+
+    openConfirmationModal(item) {
+      this.selectedItem = item;
+      this.showModal = true;
+    },
+
+    addNewRequest(request) {
+      this.newRequests.push(request);
+    },
+  },
+}
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+.notice-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.data-table-wrapper {
+  border: 2px solid #EF9A9A;
+  border-radius: 9px;
+}
+</style>

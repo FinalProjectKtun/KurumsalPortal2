@@ -20,23 +20,25 @@
     <div>
       {{ console() }}
       <!-- <v-card style="height: 300px;"> -->
-      <v-layout class="d-flex justify-center pt-10 pl-10">
+      <v-layout class="d-flex flex-column justify-center pt-10 pb-10">
         <!-- <DirectorPage v-model="dialog"></DirectorPage>
         <SecurityPage v-model="dialogSec"></SecurityPage>
         <ItDirector v-show="dialogIt"></ItDirector> -->
         <div>
-          <RequestAdd v-show=this.$store.state.isModalOpen></RequestAdd>
+          <RequestModal modalTitle= "Yeni Talep" v-show=this.$store.state.isModalOpen></RequestModal>
         </div>
         <!-- <v-main> -->
-        <div v-if="$route.name === 'home'">
-          <v-btn block color="red-darken-4" @click="openModal(), increment()">
+        <div class="d-flex justify-center" v-if="$route.name === 'home'">
+          <v-btn size="x-large" color="red-darken-4" @click="openModal(), increment()">
             Talep Ekle
           </v-btn>
         </div>
+        <DataTable />
         <!-- <v-card-text>
             <DenemePage></DenemePage>
           </v-card-text> -->
         <!-- </v-main> -->
+        <DetailModal v-show="this.$store.state.isDetailModalOpen"/>
       </v-layout>
       <!-- </v-card> -->
     </div>
@@ -48,7 +50,9 @@
 // import DirectorPage from './DirectorPage.vue';
 // import ItDirector from './ItDirector.vue';
 // import SecurityPage from './SecurityPage.vue';
-import RequestAdd from './RequestModal.vue';
+import DataTable from './DataTable.vue';
+import RequestModal from './RequestModal.vue';
+import DetailModal from './DetailModal.vue';
 
 export default {
 
@@ -57,7 +61,9 @@ export default {
     // ItDirector,
     // SecurityPage,
     // DenemePage,
-    RequestAdd
+    RequestModal,
+    DataTable,
+    DetailModal
   },
 
   data: () => ({
@@ -66,7 +72,7 @@ export default {
     // dialogIt: false,
     // drawer: false,
     // reqDialog: false,
-    items: [],
+    // items: [],
   }),
 
   methods: {
@@ -80,21 +86,10 @@ export default {
     },
 
     openModal() {
-      this.$store.commit('OPEN_MODAL')
+      this.$store.commit('OPEN_REQUEST_MODAL')
     }
-
   }
 };
 </script>
 
-<style>
-a:active,
-a:link,
-a:visited {
-  text-decoration: none;
-}
-
-a:hover {
-  background-color: #E0F7FA;
-}
-</style>
+<style></style>
