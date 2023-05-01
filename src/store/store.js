@@ -87,7 +87,6 @@ const store = createStore(
           .get("http://localhost:8081/api/person/getResponsiblePerson")
           .then((response) => {
             context.commit("INIT_PERSON_DATA", response.data.data);
-
           });
       },
 
@@ -96,7 +95,6 @@ const store = createStore(
           .get("http://localhost:8081/api/scs/getSupplierConnectSystem")
           .then((response) => {
             context.commit("INIT_SYSTEM_DATA", response.data.data);
-
           });
       },
 
@@ -105,7 +103,6 @@ const store = createStore(
           .get("http://localhost:8081/getSupplierProccessData")
           .then((response) => {
             context.commit("INIT_REQUEST_DATA", response.data.data);
-
           });
       },
 
@@ -113,7 +110,6 @@ const store = createStore(
         axios
           .post("http://localhost:8081/addSupplierProccessData", data)
           .then((response) => {
-
             context.commit("SET_RESPONSE_DATA", response.data);
           })
           .catch((error) => {
@@ -123,12 +119,10 @@ const store = createStore(
           .get("http://localhost:8081/getSupplierProccessData")
           .then((response) => {
             context.commit("INIT_REQUEST_DATA", response.data.data);
-
           });
       },
 
       updateStatusOfRequest() {
-
         axios
           .post("http://localhost:8081/updateSupplierStatus", {
             id: this.state.requestData.id,
