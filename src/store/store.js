@@ -42,17 +42,14 @@ const store = createStore(
 
       INIT_PERSON_DATA(state, newData) {
         state.responsiblePersons = newData;
-        console.log("statePerson", state.responsiblePersons);
       },
 
       INIT_SYSTEM_DATA(state, newData) {
         state.accessRequestedSystems = newData;
-        console.log("stateSystem", state.accessRequestedSystems);
       },
 
       INIT_REQUEST_DATA(state, newData) {
         state.allRequestsData = newData;
-        console.log("stateReq", state.allRequestsData);
       },
 
       SET_RESPONSE_DATA(state, responseData) {
@@ -90,7 +87,7 @@ const store = createStore(
           .get("http://localhost:8081/api/person/getResponsiblePerson")
           .then((response) => {
             context.commit("INIT_PERSON_DATA", response.data.data);
-            console.log("PersonData", response.data);
+
           });
       },
 
@@ -99,7 +96,7 @@ const store = createStore(
           .get("http://localhost:8081/api/scs/getSupplierConnectSystem")
           .then((response) => {
             context.commit("INIT_SYSTEM_DATA", response.data.data);
-            console.log("SystemData", response.data);
+
           });
       },
 
@@ -108,7 +105,7 @@ const store = createStore(
           .get("http://localhost:8081/getSupplierProccessData")
           .then((response) => {
             context.commit("INIT_REQUEST_DATA", response.data.data);
-            console.log("RequestData", response.data);
+
           });
       },
 
@@ -116,7 +113,7 @@ const store = createStore(
         axios
           .post("http://localhost:8081/addSupplierProccessData", data)
           .then((response) => {
-            console.log("ResponsePostReqData", response.data);
+
             context.commit("SET_RESPONSE_DATA", response.data);
           })
           .catch((error) => {
@@ -126,20 +123,16 @@ const store = createStore(
           .get("http://localhost:8081/getSupplierProccessData")
           .then((response) => {
             context.commit("INIT_REQUEST_DATA", response.data.data);
-            console.log("RequestData", response.data);
+
           });
       },
 
       updateStatusOfRequest() {
-        console.log("güncellemeDatası", this.state.requestData);
+
         axios
           .post("http://localhost:8081/updateSupplierStatus", {
             id: this.state.requestData.id,
             status: this.state.requestData.status,
-          })
-          .then((response) => {
-            console.log("ConModalData", this.state.requestData);
-            console.log("StatusUpdateResponseData", response.data);
           })
           .catch((error) => {
             console.log("Error", error);
@@ -153,19 +146,12 @@ const store = createStore(
             status: this.state.requestData.status,
             reasonForRejection: this.state.requestData.reasonForRejection,
           })
-          .then((response) => {
-            console.log("ConModalData", this.state.requestData);
-            console.log("ReasonForRejectionUpdateResponseData", response.data);
-          })
           .catch((error) => {
             console.log("Error", error);
           });
       },
     },
   }
-  // postRequestData(context) {
-  //   axios.post
-  // }
 );
 
 export default store;

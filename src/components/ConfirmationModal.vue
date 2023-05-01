@@ -1,20 +1,5 @@
-        <!-- <v-card>
-            <v-card-title>
-                <span class="headline">Talep Onaylama/Reddetme</span>
-            </v-card-title>
-            <v-card-text>
-                <v-text-field label="Talep ID" readonly v-model="requestData.id"></v-text-field>
-                 Diğer input alanları
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="green darken-1" text @click="onApprove()">Onayla</v-btn>
-                <v-btn color="red darken-1" text @click="onReject(), closeModal()">Reddet</v-btn>
-            </v-card-actions>
-        </v-card> -->
 <template>
     <div>
-        <!-- {{ console() }} -->
         <v-dialog v-model="this.$store.state.isConModalOpen" @input="$emit('update:value', $event)" max-width="1000px">
             <v-card>
                 <v-card-title class="headline grey lighten-6" primary-title>
@@ -126,17 +111,10 @@ export default {
         reasonForRejectionOfRequest: "",
         personRejectingRequest: ""
     }),
-    // watch: {
-    //     item() {
-    //         // "item" prop'u değiştiğinde, "requestData" prop'unu güncelleyin ve modal componentini açın
 
-    //         this.dialog = true;
-    //     }
-    // },
     methods: {
         onApprove() {
             // Onaylama işlemi
-            console.log("status", this.requestData.status + " id", this.requestData.id);
             if (this.$route.name === 'director')
                 this.requestData.status = "Awaiting Info Sec Approval"
 
@@ -147,17 +125,11 @@ export default {
                 this.requestData.status = "Approved"
             else
                 this.requestData.status = "Approved"
-            // const dataToUpdate = {
-            //     id: this.requestData.id,
-            //     status: this.requestData.status
-            // }
-
-            // console.log("dataToUpdate", dataToUpdate);
             this.$store.dispatch('updateStatusOfRequest')
         },
 
         onReject() {
-            // Reddetme işlemi
+            // Reddetme İşlemi
             if (this.$route.name === "director")
                 this.requestData.status = this.personRejectingRequest + " Tarafından Reddedildi"
 
@@ -167,7 +139,7 @@ export default {
             else if (this.$route.name === "itdirector")
                 this.requestData.status = this.personRejectingRequest + " Tarafından Reddedildi"
 
-            // this.requestData.status = "Reddedildi"
+
             this.requestData.reasonForRejection = this.reasonForRejectionOfRequest
             this.$store.dispatch('initReasonForRejection')
         },

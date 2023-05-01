@@ -1,6 +1,5 @@
 <template>
     <div class="director pt-10">
-        <!-- <DirectorPage /> -->
         <h1 class="director-page-header d-flex justify-center" color="#CD9394">Bilgi Güvenliği Onay Ekranı</h1>
         <div>
             <DataTable />
@@ -15,16 +14,12 @@
 
 <script>
 import DataTable from '@/components/DataTable.vue';
-// import RequestModal from '@/components/RequestModal.vue';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
-// import DirectorPage from '@/components/DirectorPage.vue';
 
 export default {
     name: "InfoSecurityView",
     components: {
-        // DirectorPage,
         DataTable,
-        // RequestModal
         ConfirmationModal
     },
 

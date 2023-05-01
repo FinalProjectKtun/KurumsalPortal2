@@ -13,16 +13,12 @@
 
 <script>
 import DataTable from '@/components/DataTable.vue';
-// import RequestModal from '@/components/RequestModal.vue';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
-// import DirectorPage from '@/components/DirectorPage.vue';
 
 export default {
     name: "DirectorView",
     components: {
-        // DirectorPage,
         DataTable,
-        // RequestModal,
         ConfirmationModal
     },
 

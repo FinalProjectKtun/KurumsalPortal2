@@ -2,7 +2,7 @@
     <nav>
         <v-layout>
             <v-app-bar color="white" prominent>
-                <!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>  -->
+            <!--<v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
                 <RouterLink :to="{ name: 'home' }">
                     <v-toolbar-title><v-img src="../assets/alisan-logo.png" :width="150"
                             aspect-ratio="16/9" /></v-toolbar-title>

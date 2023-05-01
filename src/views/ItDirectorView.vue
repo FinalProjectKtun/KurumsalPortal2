@@ -13,20 +13,13 @@
 
 <script>
 import DataTable from '@/components/DataTable.vue';
-// import RequestModal from '@/components/RequestModal.vue';
-// import DirectorPage from '@/components/DirectorPage.vue';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
 export default {
     name: "ItDirectorView",
     components: {
-        // DirectorPage,
         DataTable,
-        // RequestModal
         ConfirmationModal
     },
-    data: () => ({
-
-    })
 }
 </script>
 

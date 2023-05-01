@@ -70,7 +70,6 @@
 <script>
 import { mapActions } from 'vuex';
 
-// import { mapState } from 'vuex';
 export default {
 
   props: {
@@ -123,14 +122,6 @@ export default {
     },
 
     console() {
-      console.log('personName', this.selectedPersonName);
-      console.log('personPhone', this.selectedPersonPhone);
-      console.log('systemName', this.selectedSystemName);
-      console.log('supplierName', this.supplierName);
-      console.log('requestDate', this.requestDate);
-      console.log('connectionStartTime', this.connectionStartTime);
-      console.log('connectionEndTime', this.connectionEndTime);
-      console.log('requestDescription', this.requestDescription);
     },
 
     updateSelectedPersonPhone() {

@@ -1,5 +1,4 @@
 <template>
-  {{ console() }}
   <div class="notice-wrapper pt-5 pb-5 pl-5 pr-5 mt-10" v-if="this.filteredRequestList.length === 0">
     <div>
       <v-card variant="tonal">
@@ -59,11 +58,7 @@ export default {
       { title: 'Tedarikçi Adı', key: 'supplierName' },
       { title: 'Talep Tarihi', key: 'supplierDate' },
       { title: 'Sorumlu Kişi', key: 'personResponsibleForTheRequest' },
-      // { title: 'S. Kişi No', key: 'phoneNumOfThePerResForTheReq' },
       { title: 'Sistem', key: 'supplierConnectSystemName' },
-      // { title: 'Başlangıç Tarihi', key: 'supplierConnectStarted' },
-      // { title: 'Bitiş Tarihi', key: 'supplierConnectEnd' },
-      // { title: 'Açıklama', key: 'description' },
       { title: 'Status', key: 'status' },
       { title: 'İşlem', key: 'islem' },
     ],
@@ -92,18 +87,11 @@ export default {
     openModal(item) {
       this.$store.dispatch('openConModal')
       this.$store.dispatch('getRequestDataToModal', item)
-      console.log("item", item);
     },
 
     openDetailModal(item) {
       this.$store.dispatch('openDetailModal')
       this.$store.dispatch('getRequestDataToModal', item)
-      console.log("item", item);
-    },
-
-    console() {
-      console.log("modalData", this.$store.state.requestData);
-      console.log(this.$store.state.allRequestsData);
     },
 
     openConfirmationModal(item) {

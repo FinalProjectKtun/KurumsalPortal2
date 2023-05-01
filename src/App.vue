@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <HomePage /> -->
     <NavBar />
     <v-layout class="d-flex flex-column justify-center pt-10 pb-10 pl-10 pr-10">
       <RouterView />
@@ -9,7 +8,6 @@
 </template>
 
 <script>
-// import HomePage from './components/HomePage.vue'
 import NavBar from './components/NavBar.vue';
 
 export default {
