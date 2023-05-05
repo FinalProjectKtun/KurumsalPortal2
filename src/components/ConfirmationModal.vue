@@ -87,7 +87,7 @@
                         </v-row>
                         <v-card-actions>
                             <v-btn color="green darken-1" text
-                                @click="showNestedDialog = false, onReject()"><strong>Gönder</strong></v-btn>
+                                @click="showNestedDialog = false, onReject(), closeModal()"><strong>Gönder</strong></v-btn>
                             <v-spacer></v-spacer>
                             <v-btn color="primary" text @click="showNestedDialog = false"><strong>Kapat</strong></v-btn>
                         </v-card-actions>

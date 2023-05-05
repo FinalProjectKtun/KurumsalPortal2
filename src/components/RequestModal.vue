@@ -4,7 +4,9 @@
     <v-dialog v-model="this.$store.state.isModalOpen" @input="$emit('update:value', $event)" max-width="1000px">
       <v-card>
         <v-card-title class="headline grey lighten-6" primary-title>
-          {{ modalTitle }}
+          <strong>
+            {{ modalTitle }}
+          </strong>
         </v-card-title>
         <v-form>
           <v-container>

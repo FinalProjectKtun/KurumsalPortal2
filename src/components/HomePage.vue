@@ -3,15 +3,17 @@
     <div>
       <v-layout class="d-flex flex-column justify-center pt-10 pb-10">
         <div>
-          <RequestModal modalTitle= "Yeni Talep" v-show=this.$store.state.isModalOpen></RequestModal>
+          <RequestModal modalTitle="Yeni Talep" v-show=this.$store.state.isModalOpen></RequestModal>
         </div>
         <div class="d-flex justify-center" v-if="$route.name === 'home'">
           <v-btn size="x-large" color="red-darken-4" @click="openModal()">
-            Talep Ekle
+            <strong>
+              Talep Ekle
+            </strong>
           </v-btn>
         </div>
         <DataTable />
-        <DetailModal v-show="this.$store.state.isDetailModalOpen"/>
+        <DetailModal v-show="this.$store.state.isDetailModalOpen" />
       </v-layout>
     </div>
   </v-layout>

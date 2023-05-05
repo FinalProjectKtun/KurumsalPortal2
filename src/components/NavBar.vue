@@ -9,13 +9,13 @@
                 </RouterLink>
                 <v-spacer></v-spacer>
                 <RouterLink :to="{ name: 'director' }">
-                    <v-btn variant="text" color="red-darken-4">Yönetici Onay</v-btn>
+                    <v-btn variant="text" color="red-darken-4"><strong>Yönetici Onay</strong></v-btn>
                 </RouterLink>
                 <RouterLink :to="{ name: 'infosec' }">
-                    <v-btn variant="text" color="red-darken-4">Bilgi Güvenliği Onay</v-btn>
+                    <v-btn variant="text" color="red-darken-4"><strong>Bilgi Güvenliği Onay</strong></v-btn>
                 </RouterLink>
                 <RouterLink :to="{ name: 'itdirector' }">
-                    <v-btn variant="text" color="red-darken-4">IT Yönetici Onay</v-btn>
+                    <v-btn variant="text" color="red-darken-4"><strong>IT Yönetici Onay</strong></v-btn>
                 </RouterLink>
             </v-app-bar>
         </v-layout>

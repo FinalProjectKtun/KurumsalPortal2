@@ -1,12 +1,14 @@
 <template>
-    <div class="director justify-center pt-10">
+    <div class="director pt-10">
         <!-- <DirectorPage /> -->
         <h1 class="director-page-header d-flex justify-center" color="#CD9394">Takım Lideri Onay Ekranı</h1>
         <div>
             <DataTable />
+
         </div>
         <div>
-            <ConfirmationModal modalTitle= "Takım Lideri Onay Ekranı" v-show=this.$store.state.isConModalOpen></ConfirmationModal>
+            <ConfirmationModal modalTitle="Takım Lideri Onay Ekranı" v-show=this.$store.state.isConModalOpen>
+            </ConfirmationModal>
         </div>
     </div>
 </template>

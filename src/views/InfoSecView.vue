@@ -6,7 +6,8 @@
         </div>
         <div>
             <div>
-                <ConfirmationModal modalTitle= "Bilgi İşlem Onay Ekranı" v-show=this.$store.state.isConModalOpen></ConfirmationModal>
+                <ConfirmationModal modalTitle="Bilgi İşlem Onay Ekranı" v-show=this.$store.state.isConModalOpen>
+                </ConfirmationModal>
             </div>
         </div>
     </div>
